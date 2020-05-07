@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+
+function findPath(root, target) {
+  const paths = []; // 存放所有满足条件的路径
+  let sum = 0; // 路径上的节点值的总和
+  _findPath(root, []);
+  return paths;
+}
+
+function _findPath(node, path) {
+    if (node === null) {
+      return;
+    }
+
+    // 把当前节点放入路径中
+    sum = sum + node.value;
+    path.push(node);
+
+    const isLeaf = node.left === null && node.right === null;
+
+    // 如果是叶节点, 并且路径上的节点和满足条件, 记录这条路径
+    if (isLeaf && sum === target) {
+      paths.push([...path]);
+    }
+
+    // 当前节点有左子树, 向左子树递归
+    if (node.left !== null) {
+      _findPath(node.left, path);
+    }
+
+    // 当前节点有右子树, 向右子树递归
+    if (node.right !== null) {
+      _findPath(node.right, path);
+    }
+
+    // 把当前节点从路径中移除
+    sum = sum - node.value;
+    path.pop(node);
+  }
+
+</script>

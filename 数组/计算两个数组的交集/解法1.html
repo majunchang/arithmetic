@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /*
+    思路： 
+    1. 借助数组的filter方法  来筛选交集
+    2. 使用set数据结构 来进行数据的去重
+    */
+
+    function fn(num1, num2) {
+        return [...new Set(num1.filter((item) => num2.includes(item)))];
+    }
+
+    console.log(fn([1, 2, 2, 1], [2, 2]));
+    console.log(fn([4, 9, 5], [9, 4, 9, 8, 4]));
+</script>

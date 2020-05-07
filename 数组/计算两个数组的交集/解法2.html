@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    function fn(num1, num2) {
+        let arr = [];
+        let map = {};
+        for (let i = 0; i < num1.length; i++) {
+            map[num1[i]] = true;
+        }
+        for (let j = 0; j < num2.length; j++) {
+            if (map[num2[j]]) {
+                arr.push(num2[j]);
+                //  相比于arr.includes 提升效率
+                map[num2[j]] = false;
+            }
+        }
+        return arr;
+    }
+    console.log(fn([1, 2, 2, 1], [2, 2]));
+    console.log(fn([4, 9, 5], [9, 4, 9, 8, 4]));
+</script>

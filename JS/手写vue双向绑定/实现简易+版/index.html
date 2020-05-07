@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="text" />
+            {{ text }}
+            <input type="text" v-model="name" />
+            {{name}}
+        </div>
+        <button class="btn">点我改变</button>
+    </body>
+</html>
+<script>
+    function observe(obj, vm) {
+        //  对传入的对象 遍历 并分别添加 object.defineProperty
+        Object.keys(obj).forEach((key) => {
+            defineReactive(vm, key, obj[key]);
+        });
+    }
+
+    function defineReactive(vm, key, val) {
+        var dep = new Dep();
+
+        Object.defineProperty(vm, key, {
+            get: function () {
+                // 通过这一步 添加订阅者
+                if (Dep.target) dep.addSub(Dep.target);
+                return val;
+            },
+            set: function (newval) {
+                if (newval === val) return;
+                val = newval;
+                // 通知订阅者
+                dep.notify();
+            },
+        });
+    }
+
+    // 需要实现一个消息订阅器
+    function Dep() {
+        // 消息订阅的让容器是一个数组 数组的每一项 都是指代一个view和mode的中间者
+        this.subs = [];
+    }
+
+    Dep.prototype = {
+        addSub: function (sub) {
+            this.subs.push(sub);
+        },
+        notify: function () {
+            this.subs.forEach((sub) => {
+                // 在这里 需要配合watcher进行更新
+                sub.update();
+            });
+        },
+    };
+    //  在这里增加dom编译模板
+    function nodeToFragment(node, vm) {
+        var flag = document.createDocumentFragment();
+        var child;
+        while ((child = node.firstChild)) {
+            compile(child, vm);
+            // 将子节点劫持到文本节点中
+            flag.appendChild(child);
+        }
+        return flag;
+    }
+
+    function compile(node, vm) {
+        var reg = /\{\{(.*)\}\}/;
+        // 跟据节点类型去判断
+        if (node.nodeType === 1) {
+            var attr = node.attributes;
+            for (var i = 0; i < attr.length; i++) {
+                if (attr[i].nodeName === 'v-model') {
+                    // 此时 name为text
+                    var name = attr[i].nodeValue;
+                    // 增加数据的变化监听
+                    node.addEventListener('input', (e) => {
+                        vm[name] = e.target.value;
+                    });
+                    // 在这里 因为 我们的数据监听器 已经封装了vm[name]  触发了 getter方法 完成了数据的初始化
+                    node.value = vm[name];
+                    node.removeAttribute('v-model');
+                }
+            }
+            new Watcher(vm, node, name, 'input');
+        }
+        if (node.nodeType === 3) {
+            if (reg.test(node.nodeValue)) {
+                var name = RegExp.$1;
+                name = name.trim();
+                new Watcher(vm, node, name, 'text');
+            }
+        }
+    }
+    //订阅者 搭建数据监听变化和变异模板的桥梁
+    function Watcher(vm, node, name, nodeType) {
+        Dep.target = this;
+        this.vm = vm;
+        this.node = node;
+        this.name = name;
+        this.nodeType = nodeType;
+        this.update();
+        Dep.target = null;
+    }
+
+    Watcher.prototype = {
+        update: function () {
+            this.get();
+            if (this.nodeType === 'text') {
+                this.node.nodeValue = this.value;
+            }
+            if (this.nodeType === 'input') {
+                this.node.value = this.value;
+            }
+        },
+        get: function () {
+            this.value = this.vm[this.name];
+        },
+    };
+    function Vue(options) {
+        // 将options里面的data属性 放入数据监听器
+        this.data = options.data;
+        var data = this.data;
+        observe(data, this); // this指代vm
+        // 对指定id的dom 进行页面的渲染
+        this.$el = options.el;
+        var id = this.$el;
+        var Dom = nodeToFragment(document.getElementById(id), this);
+        // 编译完成之后 将dom 添加到节点中
+        document.getElementById(id).appendChild(Dom);
+    }
+
+    var vm = new Vue({
+        el: 'app',
+        data: {
+            text: 'hello world',
+            name: '你好，全世界',
+        },
+    });
+    document.getElementsByClassName('btn')[0].onclick = function () {
+        vm.text = 'majunchang';
+        vm.name = '你好，姑娘';
+    };
+    vm.data.text = 'majunchang';
+</script>
