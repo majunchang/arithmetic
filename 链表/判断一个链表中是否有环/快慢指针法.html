@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    var EntryNodeOfLoop = function (head) {
+        if (!head || !head.next) {
+            return null;
+        }
+
+        let fast = head.next.next;
+        let slow = head.next;
+
+        while (fast != slow) {
+            if (fast == null || slow === null) {
+                return false;
+                break;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        // 此处可以判断出链表是否存在环
+        let p = head;
+        // 返回的节点
+        // 定理：碰撞点p到连接点的距离=头节点到连接点的距离
+        // https://blog.csdn.net/qq_40816360/article/details/94477306
+        while (p !== slow) {
+            p = p.next;
+            slow = slow.next;
+        }
+        return p;
+    };
+</script>

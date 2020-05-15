@@ -1,0 +1,50 @@
+{
+    "editor.formatOnType": false, //编辑时是否自动格式化
+    "editor.formatOnSave": true, //保存时是否自动格式化
+    "editor.wordWrapColumn": 100, //视图每行最大字符数
+    "editor.fontSize": 13,
+    "window.zoomLevel": 1,
+    "terminal.integrated.fontSize": 13,
+    "editor.wordWrap": "wordWrapColumn", //编写代码时是否给出对齐连线
+    "prettier.semi": true, //是否添加结束分号
+    "prettier.singleQuote": true, //是否使用单引号
+    "prettier.tabWidth": 4, //tab缩进为4个空格字符
+    "prettier.printWidth": 100, //代码每行最大字符数，超出换行(会增加行数)
+    "vetur.format.options.tabSize": 4, //tab缩进为4个空格
+    "vetur.format.defaultFormatter.html": "prettier", //html格式化规则(解决属性换行问题)
+    // "vetur.format.defaultFormatter.js": "vscode-typescript", //让vue中的js按编辑器自带的ts格式进行格式化(解决属性换行问题)
+    // "vetur.format.defaultFormatter.ts": "vscode-typescript", //让vue中的ts按编辑器自带的ts格式进行格式化(解决属性换行问题) 
+    "vetur.format.defaultFormatterOptions": {
+        "js-beautify-html": { //vue文件html相关
+            "wrap_attributes": "force-expand-multiline" //以下为取值说明
+            // - auto: 仅在超出行长度时才对属性进行换行。
+            // - force: 对除第一个属性外的其他每个属性进行换行。
+            // - force-aligned: 对除第一个属性外的其他每个属性进行换行，并保持对齐。
+            // - force-expand-multiline: 对每个属性进行换行。
+            // - aligned-multiple: 当超出折行长度时，将属性进行垂直对齐。
+        },
+        "prettyhtml": { //vue文件html相关
+            "printWidth": 100, //每行最大字符数，超出换行(会增加行数)
+            "singleQuote": false, //是否使用单引号
+            "wrapAttributes": true, //属性换行
+            "sortAttributes": false //属性排序
+        },
+        "prettier": { //vue文件js相关
+            "semi": true, //是否添加结束分号
+            "singleQuote": true //是否使用单引号
+        }
+    },
+    "vetur.validation.template": false,
+    "files.associations": {
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript"
+    },
+    "emmet.includeLanguages": {
+        "wxml": "html"
+    },
+    "minapp-vscode.disableAutoConfig": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+}

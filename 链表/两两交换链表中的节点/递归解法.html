@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    /**
+     * @param {ListNode} head
+     * @return {ListNode}
+     */
+    var swapPairs = function (head) {
+        if (!head) {
+            return null;
+        }
+        if (!head.next) {
+            return head;
+        }
+        let temp = head.next;
+        head.next = swapPairs(temp.next);
+        temp.next = head;
+        return temp;
+    };
+
+    /**
+        解题思路：
+        1. head.next 指向递归返回的上一个temp
+        2. 实现后一个节点指向前一个节点 同时前一个节点指向递归返回的节点
+    */
+</script>

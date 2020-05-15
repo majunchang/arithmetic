@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @return {number[]}
+     */
+    var twoSum = function (nums, target) {
+        let map = new Map();
+        for (let i = 0; i < nums.length; i++) {
+            map.set(num[i], i);
+        }
+        for (let j = 0; j < nums.length; j++) {
+            if (map.has(target - nums[j]) && map.get(target - nums[i]) !== j) {
+                return [j, map.get(target - nums[i])];
+            }
+        }
+    };
+</script>
