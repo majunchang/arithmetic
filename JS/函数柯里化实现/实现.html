@@ -6,24 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    
+
 </body>
 </html>
 <script>
-    let  a = function(a,b,c,d){
-        return a+b+c+d
+    let a = function (a, b, c, d) {
+        return a + b + c + d
     }
 
-    let b=  curry(a,1,2)
-    console.log(b(3,4))
-    function curry(fn){
-        let args = Array.prototype.slice.call(arguments,1)
-        if(args.length >= fn.length){
+    let b = curry(a, 1, 2);
+    console.log(b(3, 4))
+
+    function curry(fn) {
+        let args = Array.prototype.slice.call(arguments, 1)
+        if (args.length >= fn1.length) {
             return fn(...args)
-        }
-        else{
-            return function(...args2){
-                return curry(fn,...args,...args2)
+        } else {
+            return function (...args2) {
+                return curry(fn, ...args, ...args2)
             }
         }
     }

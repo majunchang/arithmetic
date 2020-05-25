@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    var lengthOfLongestSubstring = function (s) {
+        let map = {};
+        let left = 0;
+        let max = '';
+        if (!s.length) {
+            return 0;
+        }
+        for (let i = 0; i < s.length; i++) {
+            let value = s.charAt(i);
+            if (map[value] >= left) {
+                left = map[value] + 1;
+            }
+            map[value] = i;
+
+            max = max > i - left + 1 ? max : i - left + 1;
+        }
+        return max;
+    };
+    console.log(lengthOfLongestSubstring('abcabcbb'));
+    console.log(lengthOfLongestSubstring('au'));
+</script>

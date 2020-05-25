@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /*
+        双指针替代暴力解法
+        将时间复杂度由 n4 变为n3
+    */
+
+    function fourSum(nums, target) {
+        if (nums.length < 4) {
+            return [];
+        }
+        let map = {};
+        let result = [];
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length - 3; i++) {
+            if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) {
+                break;
+            }
+            for (let j = i + 1; j < nums.length - 2; j++) {
+                let left = j + 1;
+                let right = nums.length - 1;
+                while (left < right) {
+                    const sum = nums[i] + nums[j] + nums[left] + nums[right];
+
+                    if (sum === target) {
+                        let key = [nums[i], nums[j], nums[left], nums[right]];
+                        if (!map[key.toString()]) {
+                            map[key.toString()] = true;
+                            result.push(key);
+                        }
+                    }
+                    if (sum < target) {
+                        left = left + 1;
+                    } else {
+                        right = right - 1;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    let nums = [1, 0, -1, 0, -2, 2];
+    let target = 0;
+    console.log(fourSum(nums, target));
+</script>

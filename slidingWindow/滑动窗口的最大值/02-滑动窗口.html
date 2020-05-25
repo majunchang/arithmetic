@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    var maxSlidingWindow = function (nums, k) {
+        let data = [];
+        let result = [];
+        for (let i = 0; i < nums.length; i++) {
+            if (i < k - 1) {
+                while (data.length > 0 && data[data.length - 1] < nums[i]) {
+                    data.pop();
+                }
+                data.push(nums[i]);
+            } else {
+                while (data.length > 0 && data[data.length - 1] < nums[i]) {
+                    data.pop();
+                }
+                data.push(nums[i]);
+                result.push(data[0]);
+                debugger;
+                if (data.length > 0 && data[0] === nums[i - k + 1]) {
+                    data.shift();
+                }
+            }
+        }
+        return result;
+    };
+    let nums = [-7, -8, 7, 5, 7, 1, 6, 0];
+    let k = 4;
+    console.log(maxSlidingWindow(nums, k));
+</script>
