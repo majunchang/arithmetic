@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number} n
+     * @return {string[][]}
+     */
+    var solveNQueens = function (n) {
+        const cols = new Set();
+        const pies = new Set(); // 左对角线的攻击位置
+        const nas = new Set(); // 右对角线的攻击位置
+        let row = 0;
+        let queens = [];
+        let res = [];
+        recurison(n, row, queens);
+        return generateCheckerboard(res, n);
+        function recurison(n, row, queens) {
+            for (let col = 0; col < n; col++) {
+                if (cols.has(col) || pies.has(row + col) || nas.has(row - col)) {
+                    continue;
+                }
+                cols.add(col);
+                pies.add(row + col);
+                nas.add(row - col);
+                queens.push(col);
+                // 继续放置下一行
+                recurison(n, row + 1, queens);
+                queens.pop();
+                pies.delete(row + col);
+                nas.delete(row - col);
+                cols.delete(col);
+            }
+
+            if (row >= n) {
+                res.push(queens.slice());
+                return;
+            }
+        }
+    };
+
+    function generateCheckerboard(res, n) {
+        return res.map((queens) => {
+            return queens.map((q) => {
+                return Array(n)
+                    .fill()
+                    .map((k, i) => {
+                        return i === q ? 'Q' : '.';
+                    })
+                    .join('');
+            });
+        });
+    }
+
+    console.log(solveNQueens(4));
+</script>

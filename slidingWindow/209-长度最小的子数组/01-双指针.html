@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number} s
+     * @param {number[]} nums
+     * @return {number}
+     */
+    var minSubArrayLen = function (s, nums) {
+        let sum = 0;
+        let j = 0;
+        let min = nums.length + 1;
+        for (let i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            while (sum >= s) {
+                min = i - j + 1 < min ? i - j + 1 : min;
+                sum = sum - nums[j++];
+            }
+        }
+        return min === nums.length + 1 ? 0 : min;
+    };
+    let s = 7;
+    let nums = [2, 3, 1, 2, 4, 3];
+    console.log(minSubArrayLen(s, nums));
+    console.log(minSubArrayLen(3, [1, 1]));
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    function strchange(str) {
+        if (str.length === 2) {
+            return [str[0] + str[1], str[1] + str[0]];
+        } else {
+            let result = [];
+            let newStr = str.slice(1);
+            let inital = str[0];
+            let newStrArr = strchange(newStr);
+            let temp = '';
+            for (let i = 0; i < newStrArr.length; i++) {
+                for (let k = 0; k <= newStrArr[i].length; k++) {
+                    temp = newStrArr[i].slice(0, k) + inital + newStrArr[i].slice(k);
+                    result.push(temp);
+                }
+            }
+            return result;
+        }
+    }
+    console.log(strchange('abcd'));
+</script>

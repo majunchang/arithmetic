@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {string} s1
+     * @param {string} s2
+     * @return {boolean}
+     */
+    var checkInclusion = function (s1, s2) {
+        let newS1 = s1.split('').sort().join('');
+        const s1Len = s1.length;
+        const len = s2.length - s1.length;
+        for (let i = 0; i <= len; i++) {
+            let newS2 = s2.substr(i, s1Len);
+            if (newS2.split('').sort().join('') === newS1) {
+                return true;
+            }
+        }
+        return false;
+    };
+    console.log(checkInclusion('ab', 'eidbaooo'));
+</script>

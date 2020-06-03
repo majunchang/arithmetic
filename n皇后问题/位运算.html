@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /*
+    *  
+    位运算
+    x & -x ：得到最低位的1
+    x & (x-1)：清零最低位的1
+    x & ((1 << n) - 1)：将x最高位至第n位(含)清零  
+    (cols | pie | na) ===> 0
+    ~(cols | pie | na) ===> -1   将0和1的位置置换 
+    举例说明    0101010  原先0 代表可放  1为不可放
+    变成       1010101  转换后  1代表可放   0 为不可放
+    ~(cols | pie | na) & ((1 << n) - 1); 11111111  
+
+    let p = bits & -bits;  得到最低位的1  
+    bits = bits & (bits - 1); 清零最低位的1
+    dfs(n, row + 1, cols | p, (pie | p) << 1, (na | p) >> 1);
+
+    说下各个参数的意义
+    row+1  为下一层
+    cols | p  看图  整个列 需要排除 p所在的这一列
+    (pie | p) << 1  下一层  需要排除p所在的这一列的左移一位
+    (na | p) >> 1   下一层  需要排除p所在的这一列的右移一位
+    */
+    let res = 0;
+    const dfs = (n, row, cols, pie, na) => {
+        if (row >= n) {
+            res++;
+            return;
+        }
+        // 得到当前所有的空位
+        let bits = ~(cols | pie | na) & ((1 << n) - 1);
+        while (bits) {
+            // 取最低位的1
+            let p = bits & -bits;
+            // 把P位置上放入皇后
+            bits = bits & (bits - 1);
+            dfs(n, row + 1, cols | p, (pie | p) << 1, (na | p) >> 1);
+        }
+    };
+    dfs(n, 0, 0, 0, 0);
+    return res;
+</script>

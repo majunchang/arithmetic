@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    var maxProfit = function (prices) {
+        let profit = [];
+        for (let i = 1; i < prices.length; i++) {
+            let temp = prices[i] - prices[i - 1];
+            if (temp > 0) {
+                profit.push(temp);
+            }
+        }
+        profit = profit.sort((a, b) => {
+            a - b;
+        });
+        console.log(profit);
+
+        let [a, b, ...c] = profit;
+        return a + b;
+    };
+    console.log(maxProfit([3, 3, 5, 0, 0, 3, 1, 4]));
+    console.log(maxProfit([1, 2, 3, 4, 5]));
+</script>
