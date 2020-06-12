@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[][]} triangle
+     * @return {number}
+     * 递归算法为自上而下的递归
+     * 算出下一层相邻节点的最小值  继而递归下一层
+     */
+
+    let triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]];
+    var minimumTotal = function (triangle) {
+        let rows = 0;
+        let cols = 0;
+        return getMinPaths(triangle, rows, cols);
+    };
+
+    function getMinPaths(triangle, rows, cols) {
+        if (rows === triangle.length - 1) {
+            return triangle[rows][cols];
+        }
+        const left = getMinPaths(triangle, rows + 1, cols);
+        const rigth = getMinPaths(triangle, rows + 1, cols + 1);
+        return Math.min(left, rigth) + triangle[rows][cols];
+    }
+    console.log(minimumTotal(triangle));
+</script>

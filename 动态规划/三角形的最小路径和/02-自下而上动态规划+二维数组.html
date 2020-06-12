@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[][]} triangle
+     * @return {number}
+     *  问题：为什么是let i = len - 2; i >= 0; i--
+     *  如果我们写成 let i=0; i< dp.length;i++  会有什么样的问题？
+     *
+     *  首先我们是自下而上的推理
+     *  由下一步 推导上一步的结果
+     *  如果是这种let i=0; i< dp.length;i++
+     *
+     *  举例： dp[1,0] = Math.min(dp[2,1],dp[2,0])+dp[1,0]
+     *  那么 我们在获取dp1的时候  需要知道Math.min(dp[2,1],dp[2,0])的值 ，但是此时是无法感知的
+     *  dp[i,j] 表示 从底部 到i，j这个位置的时候 （最小路径和）
+     */
+    let triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]];
+    var minimumTotal = function (triangle) {
+        let dp = JSON.parse(JSON.stringify(triangle));
+        const len = dp.length;
+        for (let i = len - 2; i >= 0; i--) {
+            for (let j = 0; j <= i; j++) {
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+            }
+        }
+        return dp[0][0];
+    };
+    console.log(minimumTotal(triangle));
+</script>

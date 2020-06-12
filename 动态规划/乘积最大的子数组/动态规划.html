@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    var maxProduct = function (nums) {
+        let len = nums.length;
+        let state = [];
+        let max = nums[0];
+        for (let i = 0; i < nums.length; i++) {
+            state[i] = [0, 0];
+        }
+        state[0][1] = nums[0];
+        state[0][0] = nums[0];
+
+        for (let i = 1; i < len; i++) {
+            if (nums[i] >= 0) {
+                state[i][1] = Math.max(state[i - 1][1] * nums[i], nums[i]);
+                state[i][0] = Math.min(state[i - 1][0] * nums[i], nums[i]);
+            } else {
+                state[i][1] = Math.max(state[i - 1][0] * nums[i], nums[i]);
+                state[i][0] = Math.min(state[i - 1][1] * nums[i], nums[i]);
+            }
+            max = max > state[i][1] ? max : state[i][1];
+        }
+        return max;
+    };
+    // console.log(maxProduct([-2]));
+    console.log(maxProduct([2, 3, -2, 4]));
+    console.log(maxProduct([2, 3, -10, 5, -1]));
+</script>

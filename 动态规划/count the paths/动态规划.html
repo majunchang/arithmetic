@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let arr = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 1, 0, 0, 1, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+
+    function countIngPaths(arr) {
+        let m = arr.length;
+        let n = arr[0].length;
+        let opt = [];
+        arr.forEach((item) => {
+            opt.push(new Array(8).fill(0));
+        });
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (arr[m - i - 1][n - j - 1] === 1) {
+                    opt[i][j] = 0;
+                } else {
+                    if (i === 0 || j === 0) {
+                        opt[i][j] = 1;
+                    } else {
+                        opt[i][j] = opt[i - 1][j] + opt[i][j - 1];
+                    }
+                }
+            }
+        }
+        console.log(opt);
+    }
+    countIngPaths(arr);
+</script>

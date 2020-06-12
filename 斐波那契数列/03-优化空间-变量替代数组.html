@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let time = Date.now();
+
+    function fibonacci(n) {
+        let a = 0;
+        let b = 1;
+        while (n--) {
+            // let temp = b;
+            // b = a + b;
+            // a = temp;
+            [b, a] = [a + b, b];
+        }
+        return a;
+    }
+
+    console.log(fibonacci(40));
+    let end = Date.now();
+    console.log(end - time); // 8276
+</script>
