@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {string} s1
+     * @param {string} s2
+     * @return {boolean}
+     */
+    var checkInclusion = function (s1, s2) {
+        let checkoutStr = '';
+        for (let i = 0; i < s2.length; i++) {
+            if (!s1.includes(s2.charAt(i))) {
+                continue;
+            }
+            let j = i + 1;
+            checkoutStr += s2.charAt(i);
+            while (s1.includes(s2.charAt(j)) && !checkoutStr.includes(s2.charAt(j))) {
+                checkoutStr += s2.charAt(j);
+                j++;
+            }
+            console.log(checkoutStr);
+            if (checkoutStr.length === s1.length) {
+                return true;
+            }
+            checkoutStr = '';
+        }
+        return false;
+    };
+
+    console.log(checkInclusion('abc', 'dcba'));
+</script>

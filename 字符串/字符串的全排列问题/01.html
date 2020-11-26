@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    // abc  bac cba
+    function fullPermu(str) {
+        let result = [];
+        if (!str.length) {
+            return result;
+        }
+        if (str.length === 1) {
+            result.push(str);
+        }
+        let one = str.substr(0, 1);
+        let left = str.substr(1);
+        let leftArr = fullPermu(left);
+        for (let i = 0; i < leftArr.length; i++) {
+            for (let j = 0; j < leftArr[i].length + 1; j++) {
+                result.push(leftArr[i].slice(0, j) + one + leftArr[i].slice(j));
+            }
+        }
+        return result;
+    }
+
+    console.log(fullPermu('abc'));
+</script>

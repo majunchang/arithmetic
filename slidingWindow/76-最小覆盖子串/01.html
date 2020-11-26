@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {string} s
+     * @param {string} t
+     * @return {string}
+     */
+    var minWindow = function (s, t) {
+        let left = 0;
+        let right = 0;
+        let needs = {};
+        let silWindow = {};
+        let match = 0;
+        let start = 0;
+        let minlen = Number.MAX_VALUE;
+        for (let i = 0; i < t.length; i++) {
+            let key = t[i];
+            if (!needs[key]) {
+                needs[key] = 1;
+            } else {
+                needs[key]++;
+            }
+            silWindow[key] = 0;
+        }
+
+        while (right < s.length) {
+            let c1 = s[right];
+            if (needs[c1]) {
+                silWindow[c1] += 1;
+                if (silWindow[c1] === needs[c1]) {
+                    match += 1;
+                }
+            }
+            right++;
+            while (match === Object.keys(needs).length) {
+                if (right - left < minlen) {
+                    start = left;
+                    minlen = right - left;
+                }
+                let c2 = s[left];
+                if (needs[c2]) {
+                    silWindow[c2]--;
+                    if (silWindow[c2] < needs[c2]) {
+                        match--;
+                    }
+                }
+                left++;
+            }
+        }
+        return minlen === Number.MAX_VALUE ? '' : s.substr(start, minlen);
+    };
+    // S = "ADOBECODEBANC", T = "ABC"
+    console.log(minWindow('aaaaaaaaaaaabbbbbcdd', 'abcdd'));
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let names = ['iPhone X', 'iPhone XS', '1', '2', '3', '4', '5'];
+
+    let colors = ['黑色', '白色'];
+
+    let storages = ['64g', '256g', '128', '16', '32'];
+    function arr(names, colors, storages) {
+        let res = [];
+        for (let i = 0; i < names.length; i++) {
+            for (let j = 0; j < colors.length; j++) {
+                for (let k = 0; k < storages.length; k++) {
+                    res.push(names[i] + colors[j] + storages[k]);
+                }
+            }
+        }
+        console.log(res);
+    }
+    let startTime = new Date().getTime();
+    console.log(startTime);
+
+    arr(names, colors, storages);
+    let endTime = new Date().getTime();
+    console.log(endTime);
+
+    console.log(endTime - startTime);
+</script>
