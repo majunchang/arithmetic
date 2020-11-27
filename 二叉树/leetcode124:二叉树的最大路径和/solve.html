@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val, left, right) {
+     *     this.val = (val===undefined ? 0 : val)
+     *     this.left = (left===undefined ? null : left)
+     *     this.right = (right===undefined ? null : right)
+     * }
+     */
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+
+    /*
+        1. 从当前节点出发，共有两条路径  左子树，右子树
+        2. 如果当前分支提供的value小于等于0  则直接返回0 即可
+        3. 当前路径的最大值为 max(root.left, root.right)+root.val
+    */
+    var maxPathSum = function (root) {
+        if (root != null) {
+            let max = Number.MIN_SAFE_INTEGER;
+            dfs(root, max);
+            return max;
+        }
+        return 0;
+    };
+
+    function dfs(root, max) {
+        let right = root.right;
+        let left = root.left;
+        if (left != null) {
+            left = dfs(root.left, max);
+        }
+        if (right != null) {
+            right = dfs(root.right, max);
+        }
+        // left和right的最小值
+        max = Math.max(left + right + root.val, max);
+        let currentRootRes = Math.max(left, right) + root.val;
+        // 对外输出的最大值
+        return currentRootRes > 0 ? currentRootRes : 0;
+    }
+</script>
