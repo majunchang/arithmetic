@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[]} prices
+     * @return {number}
+     */
+    var maxProfit = function (prices) {
+        if (!prices.length) {
+            return 0;
+        }
+        let maxTime = 2;
+        let maxPro = Array.from(new Array(prices.length), () => new Array(maxTime + 1));
+        for (let i = 0; i < prices.length; i++) {
+            for (let k = 0; k <= maxTime; k++) {
+                maxPro[i][k] = new Array(2);
+            }
+        }
+        for (let i = 0; i < prices.length; i++) {
+            for (let k = 0; k <= maxTime; k++) {
+                if (i === 0) {
+                    maxPro[0][k][0] = 0;
+                    maxPro[0][k][1] = -prices[i];
+                    continue;
+                }
+                if (k === 0) {
+                    maxPro[i][k][0] = 0;
+                    maxPro[i][k][1] = 0;
+                    continue;
+                }
+                maxPro[i][k][0] = Math.max(maxPro[i - 1][k][0], maxPro[i - 1][k][1] + prices[i]);
+                maxPro[i][k][1] = Math.max(
+                    maxPro[i - 1][k][1],
+                    maxPro[i - 1][k - 1][0] - prices[i]
+                );
+            }
+        }
+        console.log(maxPro);
+
+        return maxPro[prices.length - 1][maxTime][0];
+        // return Math.max(
+        //     ...maxPro[prices.length - 1].map((item) => {
+        //         return item[0];
+        //     })
+        // );
+    };
+
+    // console.log(maxProfit([3, 3, 5, 0, 0, 3, 1, 4]));
+    // console.log(maxProfit([1, 2, 3, 4, 5]));
+    // console.log(maxProfit([7, 6, 5, 3, 1]));
+    console.log(maxProfit([]));
+</script>

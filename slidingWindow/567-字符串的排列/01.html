@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {string} s1
+     * @param {string} s2
+     * @return {boolean}
+     当字符串过长的时候 会存在重复计算 超出时间限制
+     */
+    var checkInclusion = function (s1, s2) {
+        let str1 = s1.split('').sort().join('');
+        for (let i = 0; i < s2.length; i++) {
+            if (!s1.includes(s2.charAt(i))) {
+                continue;
+            }
+            let str2 = s2.substr(i, s1.length);
+            if (compare(str1, str2)) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    function compare(str1, str2) {
+        str2 = str2.split('').sort().join('');
+        return str1 === str2;
+    }
+
+    console.log(checkInclusion('ab', 'eidboaooo'));
+</script>

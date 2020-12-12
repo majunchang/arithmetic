@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number} n
+     * @param {number} k
+     * @return {number[][]}
+     */
+    var combine = function (n, k) {
+        let res = [];
+        let cur;
+        function dfs(index, prev) {
+            let lastIndex = prev.length;
+            if (lastIndex === k) {
+                console.log(prev);
+
+                res.push(prev.slice());
+                return;
+            }
+            for (let i = index; i <= n; i++) {
+                prev.push(i);
+                dfs(i + 1, prev);
+                prev.pop();
+            }
+        }
+        dfs(1, []);
+        return res;
+    };
+    // let combine = function (n, k) {
+    //     let ret = [];
+
+    //     let helper = (start, prev) => {
+    //         let len = prev.length;
+    //         if (len === k) {
+    //             ret.push(prev);
+    //             return;
+    //         }
+
+    //         for (let i = start; i <= n; i++) {
+    //             helper(i + 1, prev.concat(i));
+    //         }
+    //     };
+    //     helper(1, []);
+    //     return ret;
+    // };
+
+    console.log(combine(4, 2));
+</script>
