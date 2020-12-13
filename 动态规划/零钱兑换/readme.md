@@ -12,3 +12,19 @@
 
 输入: coins = [2], amount = 3
 输出: -1
+
+
+动态规划伪代码
+
+/// dp[amount] 输入一个目标金额 返回凑出目标金额的最少硬币数量
+def coinChange(coins,amount)
+
+
+def dp[n]
+        dp[0] = 0;
+
+    for coin in conis 
+        res = min(res,1+dep[n-coin]);
+    return res
+
+return dp[amount]
