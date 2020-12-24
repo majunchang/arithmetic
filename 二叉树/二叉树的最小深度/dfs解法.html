@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val, left, right) {
+     *     this.val = (val===undefined ? 0 : val)
+     *     this.left = (left===undefined ? null : left)
+     *     this.right = (right===undefined ? null : right)
+     * }
+     */
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    /// 广度优先遍历搜索
+    var minDepth = function (root) {
+        if (root == null) {
+            return 0;
+        }
+        let depth = Infinity;
+        if (root.left) {
+            depth = Math.min(depth, 1 + minDepth(root.left));
+        } else if (root.right) {
+            depth = Math.min(depth, 1 + minDepth(root.right));
+        } else if (root.left && root.right) {
+            depth = Math.min(depth, 1 + minDepth(root.left) + minDepth(root.right));
+        }
+        return depth;
+    };
+</script>
