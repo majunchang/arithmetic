@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {string} s
+     * @return {number}
+     */
+    var lengthOfLongestSubstring = function (s) {
+        if (!s.length) {
+            return 0;
+        }
+        let map = {};
+        let max = 0;
+        for (let i = 0, j = 0; j < s.length; j++) {
+            let val = s.charAt(j);
+            if (map[val]) {
+                // 须要保证 当前轮次的i 更新之后 大于更新之前的i
+                i = Math.max(map[val] + 1, i);
+            }
+            map[val] = j;
+            max = Math.max(j - i + 1, max);
+        }
+        return max;
+    };
+
+    console.log(lengthOfLongestSubstring('abba'));
+    console.log(lengthOfLongestSubstring('abcabcbb'));
+</script>

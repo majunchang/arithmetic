@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var checkInclusion = function (s1, s2) {
+        let standardMap = {}
+        let map = {}
+        let left = 0
+        // 将s1中的字符  映射到standardMap中
+        for (let i = 0; i < s1.length; i++) {
+            let value = s1[i]
+            if (!standardMap[value]) {
+                standardMap[value] = 1
+                continue
+            }
+            standardMap[value]++
+        }
+        for (let i = 0; i < s2.length; i++) {
+            let value = s2[i]
+            if (!standardMap[value]) {
+                left = i + 1
+                map = {}
+                continue
+            }
+            map[value] = map[value] ? ++map[value] : 1
+            while (map[value] > standardMap[value]) {
+                map[s2[left++]]--
+            }
+            if (i - left + 1 === s1.length) {
+                return true
+            }
+        }
+        return false
+    }
+    console.log(checkInclusion('hello', 'ooolleoooleh'))
+    // console.log(checkInclusion('abc', 'fbaabc'))
+</script>

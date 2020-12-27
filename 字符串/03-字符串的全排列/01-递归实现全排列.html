@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var checkInclusion = function (s1, s2) {
+        // 1 求 s1的全排列  2 s2是否包含 s1
+        let result = []
+        result = digui(s1, s1)
+        for(let i=0;i<result.length;i++){
+            if(s2.includes(result[i])){
+                return true
+            }
+        }
+        return false
+    }
+    console.log(checkInclusion("dinitrophenylhydrazine" ,
+        "acetylphenylhydrazine"))
+
+    function digui (s1) {
+        let result = []
+        if (s1.length === 1 || s1.length === 0) {
+            result.push(s1)
+            return result
+        }
+        else {
+            let one = s1.substr(0, 1)
+            let leftStr = s1.slice(1)
+            let leftArr = digui(leftStr)
+            for (let i = 0; i < leftArr.length; i++) {
+                for (let j = 0; j < leftArr[i].length + 1; j++) {
+                    result.push(leftArr[i].slice(0, j) + one + leftArr[i].slice(j))
+                }
+            }
+            return result
+        }
+    }
+
+
+</script>

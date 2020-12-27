@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var arr1 = ['flower', 'flcw', 'floight']
+    var arr2 = ['d', 'd', 'car']
+    var arr3 = ['', '']
+
+    function fn(strs) {
+        if (!strs.length) {
+            return ''
+        }
+        let standardStr = strs[0]
+        let result = ''
+        for (let i = 0; i < standardStr.length; i++) {
+            for (let j = 1; j < strs.length; j++) {
+                if (standardStr[i] !== strs[j][i]) {
+                    return result
+                }
+            }
+            result += standardStr[i]
+        }
+        return result
+
+    }
+
+    console.log(fn(arr1))
+    console.log(fn(arr2))
+    console.log(fn(arr3))
+</script>

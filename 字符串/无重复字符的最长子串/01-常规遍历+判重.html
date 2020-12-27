@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /*
+        遍历 s
+        如果 存在重复项  截取原先字符串
+        如果不存在重复想 一直累加
+        时间复杂度 为o(n2)
+     */
+    var fn = function (s) {
+        let max = 0;
+        let newstr = '';
+        let index = '';
+        for (var i = 0; i < s.length; i++) {
+            index = newstr.indexOf(s.charAt(i));
+            if (index !== -1) {
+                newstr = newstr.substr(index + 1) + s.charAt(i);
+            } else {
+                newstr += s.charAt(i);
+            }
+            max = max > newstr.length ? max : newstr.length;
+        }
+        return max;
+    };
+    let str = 'abcabcbb';
+    let str1 = 'bbbb';
+    let str2 = 'pwwkew';
+
+    console.log(fn('aab'));
+    console.log(fn(' '));
+    console.log(fn('dvdf'));
+    console.log(fn(str));
+    console.log(fn(str1));
+    console.log(fn(str2));
+</script>

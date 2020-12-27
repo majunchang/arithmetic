@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var arr1 = ['flower', 'flow', 'flight']
+    var arr2 = ['dog', 'racecar', 'car']
+    var arr3 = ['aa','aa']
+    var fn = function (strs) {
+        var firstStrs = strs[0];
+        var result ='';
+        if(!strs.length){
+            return result;
+        }
+        for (var i = 0; i < firstStrs.length; i++) {
+            for (var j =  1; j < strs.length; j++) {
+                if(firstStrs[i] != strs[j][i]){
+                    return result;
+                }
+            }
+            result += firstStrs[i];
+        }
+    }
+
+    console.log(fn(arr1))
+    console.log(fn(arr3))
+
+    var longestCommonPrefix = function(strs) {
+        let final = ""
+
+        if (!strs.length) {
+            return final
+        }
+
+        for (let i = 0; i < strs[0].length; i++) {
+
+            let reg = new RegExp("^"+strs[0].slice(0, i+1))
+            let flag = true
+            strs.forEach(str => {
+                if (!str.match(reg)) {
+                    flag = false
+                }
+            })
+            if (flag) {
+                final = strs[0].slice(0, i+1)
+            }
+        }
+        return final
+    };
+
+</script>

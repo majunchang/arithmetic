@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+        遍历 s
+        如果 存在重复项  截取原先字符串
+        如果不存在重复想 一直累加
+     */
+    var fn = function (s) {
+        let map = {}
+        let arr = s.split('')
+        let max = 0
+        let left = 0
+        if (!arr.length) {
+            return 0
+        }
+        for (let i = 0; i < arr.length; i++) {
+            let value = arr[i]
+            if (map[value] >= left) {
+                left = map[arr[i]] + 1
+            }
+            map[value] = i
+            max = max > i-left+1 ? max : i-left+1
+        }
+        return max
+    }
+    let str = 'abcabcbb'
+    let str1 = 'bbbb'
+    let str2 = 'pwwkew'
+
+    console.log(fn(''))
+    console.log(fn(' '))
+    console.log(fn('aab'))
+    console.log(fn('dvdf'))
+    console.log(fn(str))
+    console.log(fn(str1))
+    console.log(fn(str2))
+
+
+</script>

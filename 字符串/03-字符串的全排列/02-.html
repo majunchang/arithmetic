@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    function fun(str){
+        var result = [];
+        if(str.length == 1 || str.length == 0 ){
+            result.push(str);
+            return result;
+        }else{
+            var one = str.substr(0,1);
+            var left = str.substr(1);
+            var leftResult = fun(left);
+            console.log('1');
+            console.log(leftResult);
+            for(i=0;i<leftResult.length;i++){
+                for(j=0;j<leftResult[i].length+1;j++){//加1的目的是让字符one也可以插入到最后一个位置
+                    console.log('内部');
+                    result.push(leftResult[i].slice(0,j) + one + leftResult[i].slice(j));
+                    console.log('外部');
+                    console.log(result);
+                }
+            }
+        }
+        return result;
+    }
+
+    console.log(fun('abc'))
+</script>

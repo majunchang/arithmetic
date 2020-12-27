@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var reverseWords = function(s) {
+        var arr = s.trim().split(' ')
+        return arr.filter((item)=>{
+            console.log(item);
+            console.log(item.length);
+            return item.length > 0
+        }).reverse().join(' ')
+        console.log(arr);
+
+    };
+    // console.log(reverseWords('the sky is blue'));
+    // console.log(reverseWords('  hello world!  '));
+    console.log(reverseWords('a good   example'));
+
+
+</script>

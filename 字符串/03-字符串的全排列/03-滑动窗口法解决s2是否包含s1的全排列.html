@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var checkInclusion = function (s1, s2) {
+        let standard = {};
+        let slow = 0;
+        let map = {};
+
+        for (let i = 0, len = s1.length; i < len; i++) {
+            !standard[s1[i]] ? standard[s1[i]] = 1 : standard[s1[i]]++;
+        }
+
+        for (let i = 0, len = s2.length; i < len; i++) {
+            let current = s2[i];
+            //  跳过不是s1中的元素
+            if (!standard[current]) {
+                slow = i + 1;
+                map = {};
+                continue;
+            }
+
+            //  i移动的时候，字典中字符数量增加
+            !map[current] ? map[current] = 1 : map[current]++;
+
+            //  如果移动后数量超过了，则移动slow指针
+            while (map[current] > standard[current]) {
+                // slow++;
+                // map[current]--
+                map[s2[slow++]]--;
+                console.log('slow');
+                console.log(i);
+                console.log(slow);
+                console.log(map);
+            }
+            console.log('liu');
+            console.log(i);
+            console.log(map);
+            if (i - slow + 1 === s1.length) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // console.log(checkInclusion('hello', 'ooolleoooleh'))
+    console.log(checkInclusion('abc', 'fbaabc'))
+</script>
