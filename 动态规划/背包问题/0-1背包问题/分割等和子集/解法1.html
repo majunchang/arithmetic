@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[]} nums
+     * @return {boolean}
+     */
+    var canPartition = function (nums) {
+        let sum = nums.reduce((accmu, current) => {
+            return accmu + current;
+        });
+        let n = nums.length;
+        if (sum % 2 !== 0) {
+            return false;
+        }
+        nums.sort((a, b) => {
+            return a - b;
+        });
+        /// 问题到这里就变成了 从[1,1,2,3,4]的数组中 找出一个序列的和等于sum/2
+        // 声明状态转义方程 dp[i][j] 表示 找出i个数字和为j  结果为true表示可以找到  结果为false 表示不可以找到
+        var target = sum / 2;
+        const dp = new Array(n).fill(0).map((v) => new Array(target + 1).fill(false));
+
+        for (let i = 0; i < n; i++) {
+            dp[i][0] = true;
+        }
+        dp[0][nums[0]] = true;
+
+        for (let i = 1; i < nums.length; i++) {
+            for (let j = 0; j <= target; j++) {
+                if (j >= nums[i]) {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        console.log(dp);
+        return dp[nums.length - 1][target];
+    };
+
+    console.log(canPartition([1, 4, 5]));
+</script>
