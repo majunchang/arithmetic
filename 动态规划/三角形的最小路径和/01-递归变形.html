@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    var minimumTotal = function (triangle, row = 0, col = 0) {
+        if (row === triangle.length - 1) {
+            return triangle[row][col];
+        }
+        let left = minimumTotal(triangle, row + 1, col);
+        let right = minimumTotal(triangle, row + 1, col + 1);
+        return triangle[row][col] + Math.min(left, right);
+    };
+</script>
