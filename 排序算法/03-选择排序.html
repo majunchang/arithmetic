@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /**
+     *  时间复杂度 o（n2） 空间复杂度 o(1)
+     *  首先假设第一个元素是最小的  通过循环找出最小元素 然后与第一个元素进行交换
+     * @type {number[]}
+     */
+
+    var arr = [3, 4, 5, 1, 2]
+    function  selectSort (arr) {
+        let min
+        for(let i=0;i<arr.length;i++){
+            min = i
+            for(let j=i+1;j<arr.length;j++){
+                if(arr[j]<arr[min]){
+                    min = j
+                }
+            }
+            if(i != min){
+                let temp = arr[i]
+                arr[i] = arr[min]
+                arr[min] = temp
+            }
+        }
+        return arr
+    }
+
+    console.log(selectSort(arr))
+</script>

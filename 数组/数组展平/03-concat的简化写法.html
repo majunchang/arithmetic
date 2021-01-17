@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let arr = [1, 2, [[3], 4]];
+
+    function myflat(arr) {
+        return arr.reduce((sum, item) => {
+            return Array.isArray(item) ? sum.concat(myflat(item)) : sum.concat(item);
+        }, []);
+    }
+
+    console.log(myflat(arr));
+</script>

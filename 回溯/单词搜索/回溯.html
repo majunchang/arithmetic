@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {character[][]} board
+     * @param {string} word
+     * @return {boolean}
+     */
+    var exist = function (board, word) {
+        let m = board.length;
+        let n = board[0].length;
+        // 初始化一个二维数组
+        // let used = Array.from(Array(m)).map(() => Array(n));
+        // const used = new Array(m); // 二维矩阵used，存放bool值
+        // for (let i = 0; i < m; i++) {
+        //     used[i] = new Array(n);
+        // }
+        let used = Array.from(Array(m)).map(() => Array(n));
+
+        // 分为m行和n列
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (board[i][j] === word[0] && canfind(i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        function canfind(row, col, i) {
+            // 1 溢出边界的情况
+            // 2.遍历到字母的最后一项
+            if (i === word.length) {
+                return true;
+            }
+            if (row < 0 || row >= m || col < 0 || col >= n) {
+                return false;
+            }
+            if (board[row][col] != word[i] || used[row][col]) {
+                return false;
+            }
+            used[row][col] = true;
+            let canfindRest =
+                canfind(row + 1, col, i + 1) ||
+                canfind(row, col + 1, i + 1) ||
+                canfind(row - 1, col, i + 1) ||
+                canfind(row, col - 1, i + 1);
+            if (canfindRest) {
+                return true;
+            }
+            used[row][col] = false;
+            return false;
+        }
+    };
+
+    let board = [
+        ['A', 'B', 'C', 'E'],
+        ['S', 'F', 'C', 'S'],
+        ['A', 'D', 'E', 'E'],
+    ];
+    let word = 'ABCCED';
+    console.log(exist(board, word));
+</script>
