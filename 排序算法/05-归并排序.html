@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     *     将两个已经排序的数组合并，要比从头开始排序所有元素来得快。因此，可以将数组拆开，分成n个只有一个元素的数组，然后不断地两两合并，直到全部排序完成。
+     时间复杂付 o(nlogn) 空间复杂付 o（n）
+     */
+    function mergeSort(arr) {
+        if (arr.length < 2) {
+            return arr;
+        }
+
+        let middle = Math.floor(arr.length / 2);
+        let left = arr.slice(0, middle);
+        let right = arr.slice(middle);
+        let result = merge(mergeSort(left), mergeSort(right));
+        return result;
+    }
+
+    function merge(left, right) {
+        let result = [];
+        let i = 0;
+        let k = 0;
+        while (i < left.length && k < right.length) {
+            if (left[i] < right[k]) {
+                result.push(left[i++]);
+            } else {
+                result.push(right[k++]);
+            }
+        }
+        return result.concat(left.slice(i)).concat(right.slice(k));
+    }
+    // var arr = [4, 3];
+    var arr = [3, 4, 5, 1, 2];
+    console.log(mergeSort(arr));
+</script>

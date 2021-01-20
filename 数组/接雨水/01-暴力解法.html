@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /*
+     暴力解法的关键找出规律:
+     找到当前柱子 右边界的最大值max_right  左边界的最大值max_left
+     左右边界最大值的最小值  减去当前柱子的高度 就是当前柱子可以接雨水的高度
+     
+    */
+    var trap = function (height) {
+        let len = height.length;
+        let res = 0;
+        for (let i = 0; i < len; i++) {
+            let max_left = 0;
+            let max_right = 0;
+            /// 求出左边界的最大值
+            /// 求出右边界的最大值  两者的较小值 减去当前的高度
+            for (let j = i; j > 0; j--) {
+                max_left = Math.max(max_left, height[j]);
+            }
+            for (let j = i; j < len; j++) {
+                max_right = Math.max(max_right, height[j]);
+            }
+            res += Math.min(max_right, max_left) - height[i];
+        }
+        return res;
+    };
+</script>

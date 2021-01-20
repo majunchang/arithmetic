@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * 首先，在数组中选择一个中间项作为主元
+     // 2) 创建两个指针，左边的指向数组第一个项，右边的指向最后一个项，移动左指针，直到找到一个比主元大的项，接着，移动右        边的指针，直到找到一个比主元小的项，然后交换它们。重复这个过程，直到左侧的指针超过了右侧的指针。这个使比主元小的都在左侧，比主元大的都在右侧。这一步叫划分操作
+     // 3) 接着，算法对划分后的小数组（较主元小的值组成的的小数组， 以及较主元大的值组成的小数组）重复之前的两个步骤，直到排序完成
+        时间复杂度 O(n logn)  空间复杂度 O(nlogn)
+     * @type {number[]}
+     */
+    var arr = [3, 4, 5, 1, 2];
+
+    function quickSort(arr) {
+        if (!arr.length > 0) {
+            throw new Error('类型错误');
+        }
+        let leftArr = [];
+        let rightArr = [];
+
+        let middle = Math.floor(arr.length / 2);
+        let middleItem = arr.splice(middle, 1)[0];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] < middleItem) {
+                leftArr.push(arr[i]);
+            } else {
+                rightArr.psuh(arr[i]);
+            }
+        }
+        return quickSort(leftArr).concat([middleItem], quickSort[leftArr]);
+    }
+
+    console.log(quickSort(arr));
+    console.log(arr);
+</script>
