@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    function nSum(arr, target) {
+        arr = arr.sort((a, b) => {
+            return a - b;
+        });
+        let left = 0;
+        let right = 0;
+        let sum = 0;
+        let result = [];
+        let i = 0;
+        while (i < arr.length) {
+            if (sum === target) {
+                pushQueue(left, right, arr, result);
+            }
+            while (sum > target) {
+                sum -= arr[left];
+                left++;
+                if (sum === target) {
+                    pushQueue(left, right, arr, result);
+                }
+            }
+            sum += arr[right];
+            right++;
+            i++;
+        }
+        return result;
+    }
+
+    function pushQueue(left, right, arr, result) {
+        result.push(arr.slice(left, right));
+    }
+
+    console.log(nSum([2, 43, 3, 5, 7, 8, 35, 9, 10, 12, 23], 10));
+</script>

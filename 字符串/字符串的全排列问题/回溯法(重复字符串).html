@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var permute = function (nums) {
+        let result = new Set();
+        let visited = [];
+        function dfs(arr) {
+            // 触发结束条件
+            if (arr.length === nums.length) {
+                result.add(arr.join());
+                return;
+            }
+
+            for (var i = 0; i < nums.length; i++) {
+                // 排除不合法的选择
+                if (visited[i]) {
+                    continue;
+                }
+                visited[i] = true;
+                arr.push(nums[i]);
+                dfs(arr);
+                arr.pop();
+                visited[i] = false;
+            }
+        }
+        dfs([]);
+        return result;
+    };
+
+    console.log(permute(['a', 'a', 'b']));
+</script>

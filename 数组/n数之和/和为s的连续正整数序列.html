@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    /**
+     * @param {number} target
+     * @return {number[][]}
+     */
+    var findContinuousSequence = function (target) {
+        let left = 0;
+        let right = 0;
+        let halfNum = Math.ceil(target / 2);
+        let sum = 0;
+        let result = [];
+
+        while (left < halfNum) {
+            if (sum === target) {
+                pushQueue(left, right, result);
+            }
+            while (sum > target && left < halfNum) {
+                sum -= left;
+                left++;
+                if (sum === target) {
+                    pushQueue(left, right, result);
+                }
+            }
+            sum += right;
+            right++;
+        }
+        return result;
+    };
+
+    function pushQueue(left, right, result) {
+        let stack = [];
+        for (let i = left; i < right; i++) {
+            stack.push(i);
+        }
+        result.push(stack);
+    }
+
+    console.log(findContinuousSequence(9));
+</script>
