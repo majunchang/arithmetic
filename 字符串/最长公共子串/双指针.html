@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let s1 = 'asdfas';
+    let s2 = 'werasdfaswer';
+    function seekCommon(s1, s2) {
+        let left = 0;
+        let right = 0;
+        let max = 0;
+        let newStr = '';
+        while (left <= right && right <= s1.length) {
+            let newStr = s1.slice(left, right);
+            if (s2.includes(newStr)) {
+                right++;
+                max = Math.max(max, newStr.length);
+            } else {
+                left = right++;
+            }
+        }
+        return {
+            newStr: s1.substr(left, max),
+            max: max,
+        };
+    }
+    console.log(seekCommon(s1, s2));
+</script>
