@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body></body>
+
+</html>
+<script>
+  /**
+* @param {number[]} nums
+* @return {number}
+*/
+  var findLengthOfLCIS = function (nums) {
+    // 单数组的情况(边界处理)
+    if (nums.length === 1) {
+      return 1;
+    }
+    let left = 0;
+    let right = 0;
+    let res = 0;
+    // right和left代表当前下标 移动之前对比
+    // right需要注意右边界
+    while (right < nums.length - 1) {
+      // 判断条件
+      if (nums[right] >= nums[right + 1]) {
+        left = right + 1;
+      }
+      right++
+      // 是否需要加1
+      res = Math.max(res, right - left + 1)
+    }
+    return res;
+  };
+  console.log(findLengthOfLCIS([1, 3, 5, 4, 7]));
+  console.log(findLengthOfLCIS([2, 2, 2, 2]));
+
+  var findLengthOfLCISone = function (nums) {
+    let left = 0;
+    let right = 0;
+    let res = 0;
+    // right和left代表窗口左右边界 移动之后对比
+    while (right < nums.length) {
+      // 判断条件
+      if (nums[right - 1] >= nums[right]) {
+        left = right;
+      }
+      right++
+      // 是否需要加1
+      res = Math.max(res, right - left)
+    }
+    return res;
+  };
+</script>
