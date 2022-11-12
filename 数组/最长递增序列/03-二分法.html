@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  /**
+   * https://leetcode.cn/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/
+  * @param {number[]} nums
+  * @return {number}
+  */
+  var lengthOfLIS = function (nums) {
+    const len = nums.length;
+    if (len <= 1) {
+      return len;
+    }
+
+    let tail = [];
+    let end = 0;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] > tail[end]) {
+        end++;
+        tail[end] = nums[i]
+      } else {
+        let left = 0;
+        let right = end;
+        while (left < right) {
+          // 二分算法
+        }
+        tail[left] = nums[i];
+      }
+
+      end++;
+      return end;
+    }
+
+
+  };
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  /**
+   * 
+   基于「动态规划」的状态设计需要满足「无后效性」的设计思想，可以将状态定义为「以 nums[i] 结尾 的「上升子序列」的长度」。
+  「无后效性」的设计思想：不确定的因让素确定下来，以保证求解的过程形成一个逻辑上的有向无环图。这题不确定的因素是某个元素是  否被选中，而我们设计状态的时候，让 nums[i] 必需被选中，这一点是「让不确定的因素确定下来」，也是我们这样设计状态的原因。
+   * @param {number[]} nums
+   * @return {number}
+   * 动态规划三要素
+   */
+  var lengthOfLIS = function (nums) {
+    const len = nums.length;
+    if (len <= 1) {
+      return len;
+    }
+
+    let dp = new Array(len).fill(1);
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < i; j++) {
+        if (nums[i] > nums[j]) {
+          dp[i] = Math.max(dp[i], dp[j] + 1)
+        }
+      }
+    }
+    return Math.max.apply(this, dp);
+
+  };
+
+  console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
+</script>

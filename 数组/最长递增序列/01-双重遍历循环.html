@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+  /**
+   * 双重遍历循环 只能解决原数组中间部分为单调系列 
+   * 需要考虑回溯算法 时间复杂度很高 约为指数级别 
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var lengthOfLIS = function (nums) {
+
+    if (nums.length === 1) {
+      return 1;
+    }
+
+    let i = 0;
+    let j = 1;
+    let stack = []
+    let res = 0;
+    let arr = []
+    while (i < nums.length) {
+      j = i + 1;
+      stack = [nums[i]]
+      while (j < nums.length) {
+        if (stack[stack.length - 1] < nums[j]) {
+          stack.push(nums[j])
+        }
+        j++;
+      }
+      arr.push(stack)
+      res = Math.max(stack.length, res);
+      i = i + 1;
+    }
+    console.log(arr)
+    return res
+  };
+
+  // console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
+  // console.log(lengthOfLIS([0, 1, 0, 3, 2, 3]))
+  console.log(lengthOfLIS([7, 7, 7, 7, 7, 7, 7]))
+</script>
