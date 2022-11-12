@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    let candidates = [10, 1, 2, 7, 6, 1, 5]
+    let target = 8
+    function combinationSum() {
+        let path = []
+        let sum = 0;
+        // 进行一步排序
+        candidates.sort();
+        function dfs(sum, i) {
+            if (sum === target) {
+
+            }
+
+            let pre = -1;
+            for (let i = 0; i < candidates.length; i++) {
+                if (candidates[i] > target - sum || pre === candidates[i]) {
+                    continue;
+                }
+                sum += candidates[i]
+                path.push(candidates[i]);
+
+                dfs(sum, i + 1)
+                path.pop()
+                sum -= candidates[i]
+            }
+
+        }
+        dfs(0, 0)
+    }
+
+</script>

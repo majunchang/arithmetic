@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    let num1 = 12345
+    let num2 = 123456789;
+    function addNum(num1, num2) {
+        // 转化字符串的操作
+        let str1 = num1.toString();
+        let str2 = num2.toString();
+        // 确定length
+        let maxLen = Math.max(str1.length, str2.length);
+        str1 = padStart(maxLen, str1);
+        str2 = padStart(maxLen, str2)
+        let sum = '';
+        let result = '';
+        let tem = 0;
+        console.log(str1)
+        console.log(str2)
+        for (let i = maxLen - 1; i >= 0; i--) {
+            sum = (str1[i] - 0) + (str2[i] - 0) + tem;
+            console.log(sum)
+            tem = sum / 10 | 0;
+            result = sum % 10 + result;
+        }
+        return result;
+    }
+
+    // console.log(padStart(10, '123'));
+    function padStart(len, str) {
+        while (str.length < len) {
+            str = `0${str}`;
+        }
+        return str;
+    }
+    console.log(addNum(num1, num2))
+</script>
