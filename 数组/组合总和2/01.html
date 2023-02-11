@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+    var combinationSum = function (candidates, target) {
+        let sum = 0;
+        candidates.sort();
+        let result = [];
+        let path = [];
+        function dfs(j, sum) {
+            if (sum > target) {
+                return
+            }
+            if (sum === target) {
+                result.push(path.slice());
+                return;
+            }
+            // 这里i从j开始  防止重复元素
+            for (let i = j; i < candidates.length; i++) {
+                // 进行剪枝优化
+                if (sum > target - candidates[i]) {
+                    continue;
+                }
+                path.push(candidates[i]);
+                sum += candidates[i]
+                dfs(i, sum);
+                path.pop();
+                sum -= candidates[i]
+            }
+        }
+
+        dfs(0, 0);
+        return result;
+    };
+</script>
