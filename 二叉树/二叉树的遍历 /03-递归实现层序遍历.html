@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body></body>
+
+</html>
+<script>
+    var node4 = { left: null, right: null, val: 4 };
+    var node5 = { left: null, right: null, val: 5 };
+    var node6 = { left: null, right: null, val: 6 };
+    var node7 = { left: null, right: null, val: 7 };
+    var node3 = { left: node6, right: node7, val: 3 };
+    var node2 = { left: node4, right: node5, val: 2 };
+    var node1 = { left: node2, right: node3, val: 1 };
+
+    function sequence() { }
+
+    // 深度优先遍历
+    var levelOrder = function (root) {
+        // 容器（二维数组）
+        const ans = [];
+        // 搜索所有节点（从第一层开始，对应索引为0）
+        dfs(root, 0, ans);
+
+        return ans;
+    };
+
+    var dfs = function (node, level, cont) {
+        // 如果节点为空，终止当前搜索
+        if (node === null) return;
+        // 比对当前结果容器中的层级结果容器数量与当前层（位置），
+        // 如果未初始化当前层的容器，则推入一个新数组
+        if (cont.length <= level) cont.push([]);
+        // 向当前层的结果容器中加入目标值
+        cont[level].push(node.val);
+        // 递归左子树
+        dfs(node.left, level + 1, cont);
+        // 递归右子树
+        dfs(node.right, level + 1, cont);
+    };
+
+    console.log(levelOrder(node1))
+</script>
