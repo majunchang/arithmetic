@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  var longestPalindrome = function (s) {
+    if (s <= 1) {
+      return s;
+    }
+
+    let max = '';
+
+    for (let i = 0; i < s.length; i++) {
+      let left = i;
+      let right = i;
+      // 锁定左边和s[i]相同的邻居范围
+      while (left > 0 && s[left - 1] === s[i]) {
+        left--;
+      }
+
+      // 锁定右边和s[i]相同的邻居范围
+      while (right < s.length && s[right + 1] === s[i]) {
+        right++;
+      }
+      // 以左右邻居为起点，向两边扩散，任何一方达到左右边界，则对称长度达到极限。
+      while (left > 0 && right < s.length) {
+        if (s[left] !== s[right]) {
+          break;
+        }
+        left--;
+        right++
+        // 进行比较
+        if (right - left + 1 >= max) {
+          max = s.slice(left, right + 1);
+        }
+      }
+
+    }
+    return max;
+  }
+
+  console.log(longestPalindrome('abccccdd'))
+</script>
