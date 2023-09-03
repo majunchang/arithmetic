@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body></body>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body></body>
+
 </html>
 <script>
-    function nSum(arr, target) {
-        arr = arr.sort((a, b) => {
-            return a - b;
-        });
-        let left = 0;
-        let right = 0;
-        let sum = 0;
-        let result = [];
-        let i = 0;
-        while (i < arr.length) {
+    /**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+    var combinationSum2 = function (candidates, target) {
+        const res = [],
+            path = [],
+            len = candidates.length;
+        candidates.sort();
+
+        const dfs = (sum, i) => {
+            if (sum > target) return;
             if (sum === target) {
-                pushQueue(left, right, arr, result);
+                res.push([...path]);
+                return;
             }
-            while (sum > target) {
-                sum -= arr[left];
-                left++;
-                if (sum === target) {
-                    pushQueue(left, right, arr, result);
-                }
+
+            let pre = -1; //recored last
+            for (let j = i; j < len; j++) {
+                const cur = candidates[j];
+                if (cur > target - sum || cur === pre) continue;
+                path.push(cur);
+                sum += cur;
+                pre = cur;
+                //往下走
+                dfs(sum, j + 1);
+                //回溯
+                path.pop();
+                sum -= cur;
             }
-            sum += arr[right];
-            right++;
-            i++;
-        }
-        return result;
-    }
+        };
 
-    function pushQueue(left, right, arr, result) {
-        result.push(arr.slice(left, right));
-    }
+        dfs(0, 0);
 
-    console.log(nSum([2, 43, 3, 5, 7, 8, 35, 9, 10, 12, 23], 10));
+        return res;
+    };
+
+    console.log(combinationSum2([2, 43, 3, 5, 7, 8, 35, 9, 10, 12, 23], 100));
+    console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
 </script>
